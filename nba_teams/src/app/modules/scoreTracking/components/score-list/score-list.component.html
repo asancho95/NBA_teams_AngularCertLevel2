@@ -1,11 +1,11 @@
 <div class="container">
     <div class="container__filters">
-        <select #selectedTeam>
+        <select #teamSelect>
             <option [value]="team.id" *ngFor="let team of teams$ | async">
                 {{team.full_name}}
             </option>
         </select>
-        <button class="primary" (click)="trackTeam(selectedTeam.value)">Track team</button>
+        <button id="trackBtn" class="primary" (click)="trackTeam(teamSelect.value)">Track team</button>
     </div>
     <div class="container__list">
         <app-team-card *ngFor="let team of teamsToShow" [team]="team"></app-team-card>

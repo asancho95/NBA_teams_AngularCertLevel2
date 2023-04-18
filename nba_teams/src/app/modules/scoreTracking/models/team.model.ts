@@ -1,5 +1,6 @@
 export interface TeamsData {
     data: Team[];
+    meta: Pagination;
 }
 
 export interface Team {
@@ -13,7 +14,7 @@ export interface Team {
 }
 
 export interface GameData {
-    meta: any;
+    meta: Pagination;
     data: Game[];
 }
 
@@ -34,12 +35,22 @@ export interface Game {
 export interface Stats {
     wins: number;
     losses: number;
-    averagePointsScored: number;
-    averagePointsConceded: number;
-    lastGames: Result[];
+    draws: number;
+    pointsScored: number;
+    pointsConceded: number;
+    games: Result[];
 }
 
 export enum Result {
     WIN = 'W',
-    LOSE = 'L'
+    LOSE = 'L',
+    DRAW = 'D'
+}
+
+export interface Pagination {
+    total_pages: number;
+    current_page: number;
+    next_page?: number;
+    per_page: number;
+    total_count: number;
 }

@@ -25,7 +25,7 @@
             }
             mark {
                 text-align: center;
-                border-radius: 25px;
+                border-radius: 50px;
                 width: 16px;
                 padding: 4px;
                 color: white;
@@ -36,12 +36,16 @@
             mark.L {
               background-color: red;
             }
+            mark.D {
+              background-color: orange;
+            }
         }
         &__logo {
             width: 200px;
         }
     }
     &__button {
+        cursor: pointer;
         height: 40px;
         background-color: green;
         color: white;

@@ -1,6 +1,6 @@
 <div class="card" *ngIf="team && (result$ | async)">
 	<div>
-		<h2 class="card__title">{{team.full_name}} [{{team.abbreviation}}] <button [id]="'remove' + team.abbreviation" class="card__close"
+		<h2 class="card__title">{{team.full_name}} [{{team.abbreviation}}]<button [id]="'remove' + team.abbreviation" class="card__close"
 				(click)="deleteTeam(team)">&times;</button></h2>
 		<h3>{{team.conference}}ern conference</h3>
 	</div>
@@ -11,10 +11,13 @@
 				Results of past 12 days:
 			</p>
 			<div class="card__detail__info__marks">
-				<mark class="tag" *ngFor="let result of stats.lastGames" [class]="result">{{result}}</mark>
+				
 			</div>
-			<p>Avg pts scored: <strong>{{stats.averagePointsScored}}</strong> </p>
-			<p>Avg pts conceded: <strong>{{stats.averagePointsConceded}}</strong> </p>
+			<div class="card__detail__info__marks">
+				<mark class="tag" *ngFor="let result of stats.games" [class]="result">{{result}}</mark>
+			</div>
+			<p>Avg pts scored: <strong>{{stats.pointsScored}}</strong> </p>
+			<p>Avg pts conceded: <strong>{{stats.pointsConceded}}</strong> </p>
 		</div>
 		<img class="card__detail__logo" [src]="logoSrc" />
 	</div>

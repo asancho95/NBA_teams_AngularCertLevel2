@@ -10,8 +10,10 @@ import { Observable } from 'rxjs';
 })
 export class ScoreListComponent implements OnInit {
 
+	//Variable to fill dropdown's list
 	teams$: Observable<Team[]> = new Observable();
 
+	//Teams tracked list
 	get teamsToShow(): Team[] {
 		return this.nbaService.teamsToShow;
 	}
@@ -19,9 +21,14 @@ export class ScoreListComponent implements OnInit {
 	constructor(private nbaService: NbaService) { }
 
 	ngOnInit(): void {
-		this.teams$ = this.nbaService.getAllTeams()
+		//Retrieving all teams list to dropdown
+		this.teams$ = this.nbaService.getAllTeams();
 	}
 
+	/**
+	 * Method in charge of find team tracked to add to teams array of NBA service
+	 * @param teamId Team searched id
+	 */
 	trackTeam(teamId: string): void {
 		let team: Team | undefined = this.nbaService.allTeams.find(team => team.id == Number(teamId));
 		if (team) {
