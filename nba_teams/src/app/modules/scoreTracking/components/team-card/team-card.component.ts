@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Team, TeamResult } from '../../models/team.model';
+import { Observable, tap } from 'rxjs';
+import { Result, Stats, Team, Game } from '../../models/team.model';
 import { NbaService } from '../../services/nba.service';
 
 @Component({
@@ -11,13 +11,20 @@ import { NbaService } from '../../services/nba.service';
 export class TeamCardComponent {
 
 	@Input() team?: Team;
-	result$: Observable<TeamResult[]> = new Observable();
+	result$: Observable<Game[]> = new Observable();
+	stats?: Stats;
+
+	get logoSrc(): string {
+		return `https://interstate21.com/nba-logos/${this.team?.abbreviation}.png`
+	}
 
 	constructor(private nbaService: NbaService) { }
 
 	ngOnInit(): void {
 		if(this.team) {
-			this.result$ = this.nbaService.getResult(this.team);
+			this.result$ = this.nbaService.getResult(this.team).pipe(
+				tap((games) =>  this.stats = this.nbaService.getStatsByGame(games, this.team))
+			  );
 		}
 	}
 

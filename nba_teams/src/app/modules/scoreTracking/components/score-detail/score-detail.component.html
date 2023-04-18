@@ -1,1 +1,20 @@
-<p>score-detail works!</p>
+<div class="card" *ngIf="team">
+    <div>
+		<h2 class="card__title">{{team.full_name}} [{{team.abbreviation}}]</h2>
+		<h3>{{team.conference}}ern conference</h3>
+	</div>
+	<hr />
+	<div class="card__detail">
+		<div>
+			<p>
+				Scores of past 12 days:
+			</p>
+			<p *ngFor="let result of results$ | async">
+                <strong>{{result.home_team.abbreviation}}</strong>  {{result.home_team_score}} - {{result.visitor_team_score}} <strong>{{result.visitor_team.abbreviation}}</strong>
+            </p>
+		</div>
+	</div>
+	<div>
+		<button class="card__button"  #backBtn routerLink=""><< Back to all team stats</button>
+	</div>
+</div>

@@ -1,30 +1,24 @@
 <div class="card" *ngIf="team && (result$ | async)">
-    <div>
-      <h3>{{team.full_name}} [{{team.abbreviation}}] <span (click)="deleteTeam(team)">&times;</span></h3>
-      <h6>{{team.conference}}ern conference</h6>
-    </div>
-    <hr/>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <p>
-            Results of past 12 days:
-          </p>
-          <!-- <p>
-            <mark class="tag" *ngFor="let result of stats.lastGames" [class]="result">{{result}}</mark>
-          </p>
-          <p>Avg pts scored: <strong>{{stats.averagePointsScored}}</strong> </p>
-          <p>Avg pts conceded: <strong>{{stats.averagePointsConceded}}</strong> </p> -->
-  
-        </div>
-        <div class="col-sm-6">
-          <img src="https://interstate21.com/nba-logos/{{team.abbreviation}}.png" />
-        </div>
-      </div>
-    </div>
-    <div>
-      <button class="tertiary" [routerLink]=" 'results/'+ team.abbreviation">See game results >></button>
-    </div>
-  
-  </div>
-  
+	<div>
+		<h2 class="card__title">{{team.full_name}} [{{team.abbreviation}}] <button [id]="'remove' + team.abbreviation" class="card__close"
+				(click)="deleteTeam(team)">&times;</button></h2>
+		<h3>{{team.conference}}ern conference</h3>
+	</div>
+	<hr />
+	<div class="card__detail">
+		<div class="card__detail__info" *ngIf="stats">
+			<p>
+				Results of past 12 days:
+			</p>
+			<div class="card__detail__info__marks">
+				<mark class="tag" *ngFor="let result of stats.lastGames" [class]="result">{{result}}</mark>
+			</div>
+			<p>Avg pts scored: <strong>{{stats.averagePointsScored}}</strong> </p>
+			<p>Avg pts conceded: <strong>{{stats.averagePointsConceded}}</strong> </p>
+		</div>
+		<img class="card__detail__logo" [src]="logoSrc" />
+	</div>
+	<div>
+		<button [id]="'results'+team.abbreviation" class="card__button" [routerLink]=" 'results/'+ team.abbreviation">See game results >></button>
+	</div>
+</div>

@@ -12,12 +12,12 @@ export interface Team {
     name: string;
 }
 
-export interface TeamResultData {
+export interface GameData {
     meta: any;
-    data: TeamResult[];
+    data: Game[];
 }
 
-export interface TeamResult {
+export interface Game {
     id: number;
     date: Date;
     home_team: Team;
@@ -29,4 +29,17 @@ export interface TeamResult {
     time: string;
     visitor_team: Team;
     visitor_team_score: number;
+}
+
+export interface Stats {
+    wins: number;
+    losses: number;
+    averagePointsScored: number;
+    averagePointsConceded: number;
+    lastGames: Result[];
+}
+
+export enum Result {
+    WIN = 'W',
+    LOSE = 'L'
 }
