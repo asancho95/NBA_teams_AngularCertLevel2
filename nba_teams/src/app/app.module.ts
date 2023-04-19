@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ScoreListComponent } from './modules/scoreTracking/components/score-list/score-list.component';
+import { ScoreTrackingModule } from './modules/scoreTracking/score-tracking.module';
 
 @NgModule({
 	declarations: [
@@ -11,7 +11,8 @@ import { ScoreListComponent } from './modules/scoreTracking/components/score-lis
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule
+		AppRoutingModule, 
+		ScoreTrackingModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
