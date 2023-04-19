@@ -103,6 +103,12 @@ export class NbaService {
 		return params;
 	}
 
+	/**
+	 * Method in charge of get all stats from games array (wins, losees and scores)
+	 * @param results Games to check
+	 * @param team Team to search scores
+	 * @returns Object with data needed to show wins, losses and scores
+	 */
 	getStatsOfAllGames(results: Game[], team: Team | undefined): Stats {
 		const stats: Stats = { wins: 0, losses: 0, draws: 0, pointsScored: 0, pointsConceded: 0, games: [] };
 		results.forEach((game: Game) => {
@@ -119,6 +125,12 @@ export class NbaService {
 		return stats;
 	}
 
+	/**
+	 * Method in charge of indentify id the team is visitor or not to update its scores
+	 * @param team Team to search
+	 * @param game Game with scores
+	 * @returns Object with data needed to show wins, losses and scores
+	 */
 	private getStatsByGame(team: Team | undefined, game: Game): Stats {
 		let stats: Stats = { wins: 0, losses: 0, draws: 0, pointsScored: 0, pointsConceded: 0, games: [] };
 		if (game.home_team.id === team?.id) {
@@ -129,6 +141,12 @@ export class NbaService {
 		return stats;
 	}
 
+	/**
+	 * Method in charge of update data of Stats with scores
+	 * @param stats Object to update
+	 * @param teamScore Score of the team
+	 * @param enemyScore Score of the enemy team
+	 */
 	private updatePoints(stats: Stats, teamScore: number, enemyScore: number) {
 		stats.pointsScored = teamScore;
 		stats.pointsConceded = enemyScore;
@@ -141,6 +159,11 @@ export class NbaService {
 		}
 	}
 
+	/**
+	 * Method in charge of add the result of the match to show in each card
+	 * @param games 
+	 * @param stats 
+	 */
 	private addStateGame(games: Result[], stats: Stats) {
 		if(stats.wins === 1) {
 			games.push(Result.WIN);
