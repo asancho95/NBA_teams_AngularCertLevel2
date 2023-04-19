@@ -13,22 +13,17 @@ import { TeamCardComponent } from './components/team-card/team-card.component';
 	declarations: [
 		ScoreListComponent,
 		ScoreDetailComponent,
-  TeamCardComponent
+  		TeamCardComponent
+	],
+	exports: [
+		ScoreListComponent,
+		ScoreDetailComponent,
+  		TeamCardComponent
 	],
 	imports: [
 		CommonModule,
 		HttpClientModule,
-		RouterModule.forChild([
-			{
-				path: '', component: ScoreListComponent
-			},
-			{
-				path: 'results/:teamCode', component: ScoreDetailComponent
-			},
-			{ 
-				path: '**', component: ScoreListComponent
-			}
-		])
+		RouterModule
 	],
 	providers: [ NbaService ]
 })
