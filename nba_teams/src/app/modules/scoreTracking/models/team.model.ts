@@ -35,7 +35,6 @@ export interface Game {
 export interface Stats {
     wins: number;
     losses: number;
-    draws: number;
     pointsScored: number;
     pointsConceded: number;
     games: Result[];
@@ -43,8 +42,7 @@ export interface Stats {
 
 export enum Result {
     WIN = 'W',
-    LOSE = 'L',
-    DRAW = 'D'
+    LOSE = 'L'
 }
 
 export interface Pagination {

@@ -85,7 +85,8 @@ export class NbaService {
 	private getDates(numberOfDays: number): string[] {
 		let dates: string[] = new Array(numberOfDays).fill(0).map((item: number, index: number) => {
 			let day: Date = new Date();
-			day.setDate(day.getDate()-index);
+			const daysBefore: number = index + 1;
+			day.setDate(day.getDate()-(daysBefore));
 			return `${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`;
 		});
 	  	return dates;
@@ -110,12 +111,11 @@ export class NbaService {
 	 * @returns Object with data needed to show wins, losses and scores
 	 */
 	getStatsOfAllGames(results: Game[], team: Team | undefined): Stats {
-		const stats: Stats = { wins: 0, losses: 0, draws: 0, pointsScored: 0, pointsConceded: 0, games: [] };
+		const stats: Stats = { wins: 0, losses: 0, pointsScored: 0, pointsConceded: 0, games: [] };
 		results.forEach((game: Game) => {
 			let gameStats: Stats = this.getStatsByGame(team, game);
 			stats.wins += gameStats.wins;
 			stats.losses += gameStats.losses;
-			stats.draws += gameStats.draws;
 			stats.pointsConceded += gameStats.pointsConceded;
 			stats.pointsScored += gameStats.pointsScored;
 			this.addStateGame(stats.games, gameStats);
@@ -132,7 +132,7 @@ export class NbaService {
 	 * @returns Object with data needed to show wins, losses and scores
 	 */
 	private getStatsByGame(team: Team | undefined, game: Game): Stats {
-		let stats: Stats = { wins: 0, losses: 0, draws: 0, pointsScored: 0, pointsConceded: 0, games: [] };
+		let stats: Stats = { wins: 0, losses: 0, pointsScored: 0, pointsConceded: 0, games: [] };
 		if (game.home_team.id === team?.id) {
 			this.updatePoints(stats, game.home_team_score, game.visitor_team_score);
 		} else if (game.visitor_team.id === team?.id) {
@@ -152,10 +152,8 @@ export class NbaService {
 		stats.pointsConceded = enemyScore;
 		if (teamScore > enemyScore) {
 			stats.wins += 1;
-		} else if(teamScore < enemyScore) {
-			stats.losses += 1;
 		} else {
-			stats.draws += 1;
+			stats.losses += 1;
 		}
 	}
 
@@ -167,10 +165,8 @@ export class NbaService {
 	private addStateGame(games: Result[], stats: Stats) {
 		if(stats.wins === 1) {
 			games.push(Result.WIN);
-		} else if(stats.losses === 1) {
-			games.push(Result.LOSE);
 		} else {
-			games.push(Result.DRAW);
+			games.push(Result.LOSE);
 		}
 	}
 }
